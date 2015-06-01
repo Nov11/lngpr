@@ -1,0 +1,4 @@
+kernel//home/loongson/lngpr/record.ko
+kernel//home/loongson/lngpr/writelog.ko
+kernel//home/loongson/lngpr/readlog.ko
+kernel//home/loongson/lngpr/ioctl.ko
