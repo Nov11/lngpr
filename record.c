@@ -21,12 +21,12 @@
 //#define SYS_CALL_TABLE	0xffffffff8161d3c0
 
 
-#define SYS_TAB_ONE	0xffffffff80202630
+#define SYS_TAB_ONE	0xffffffff8020d4f0
 // t sys_call_table
-#define SYS_TAB_TWO	0xffffffff80203d10 
+#define SYS_TAB_TWO	0xffffffff80215360
 //t sys_call_table
 MODULE_LICENSE("GPL");
-char* program = "a.out";
+char* program = "getpid";
 module_param(program, charp, S_IRUSR | S_IWUSR);
 MODULE_PARM_DESC(program, "program to be record");
 
@@ -37,7 +37,8 @@ int replay_pid;
 int Device_Open = 0;
 int to_record;
 int to_replay;
-void* systable[2] = {(void*)SYS_TAB_ONE, (void*)SYS_TAB_TWO};
+char* file_name = "/home/loongson/lngpr/rrlog";
+void** systable[2] = {(void**)SYS_TAB_ONE, (void**)SYS_TAB_TWO};
 
 static int device_open(struct inode* inode, struct file* filp)
 {
@@ -94,7 +95,7 @@ void write_log(void)
 	char buf[20];
 	int ret;
 
-	filp = filp_open("/home/c6s/test/log", O_RDWR | O_CREAT, 0644);
+	filp = filp_open(file_name, O_RDWR | O_CREAT, 0644);
 	if(IS_ERR(filp)){
 		printk("ERROR in filp_open\n");
 		return ;
@@ -119,7 +120,7 @@ int read_log(void)
 	struct file* filp;
 	int ret;
 	char* ptr;
-	filp = filp_open("/home/c6s/test/log", O_RDWR, 0644);
+	filp = filp_open(file_name, O_RDWR, 0644);
 	if(IS_ERR(filp)){
 		printk(KERN_INFO"Error in filpopen (replay\n");
 		return -1;
@@ -144,7 +145,7 @@ int read_log(void)
 	//convert long to int intentionaliy
 	return (int)saved_pid;
 }
-asmlinkage int (*real_getpid)(void);
+asmlinkage int (*real_getpid[2])(void);
 asmlinkage int rr_getpid(void) 
 {
 	int ret;
@@ -153,7 +154,7 @@ asmlinkage int rr_getpid(void)
 	write_log();
 	//printk(KERN_INFO"$$TODO fake logging done\n");
 	printk(KERN_INFO"about to call original getpid()\n");
-	return  real_getpid();
+	return  real_getpid[0]();
 	}else if(to_replay && current->pid == replay_pid){
 		printk(KERN_INFO"inside replay getpid\n");
 		ret = read_log();
@@ -161,7 +162,8 @@ asmlinkage int rr_getpid(void)
 		return ret;
 	}
 	//none of above
-	return real_getpid();
+	printk(KERN_INFO"11111\n");
+	return real_getpid[0]();
 }
 
 static  int change_sys_call_table(void)
@@ -176,12 +178,14 @@ static  int change_sys_call_table(void)
 	for(i = 0; i < 2; i++){
 	make_rw((unsigned long)systable[i]);
     //systable = (void**)SYS_CALL_TABLE;
-	real_getpid = *((void**)systable[i] + __NR_getpid);
+	real_getpid[i] = *((void**)systable[i] + __NR_getpid);
 	*((void**)systable[i]  + __NR_getpid) = rr_getpid;
 	make_ro((unsigned long)systable[i]);
 	}	
 	sys_call_tab_chged = 1;
-	printk(KERN_INFO"ori: %p now: %p\n", real_getpid, rr_getpid);
+	for(i = 0; i < 2; i++){
+		printk(KERN_INFO"ori: %p now: %p\n", real_getpid[i], rr_getpid);
+	}
 	return 0;
 }
 
@@ -195,12 +199,14 @@ static int restore_sys_call_table(void)
 	}
 	for(i = 0; i < 2; i++){
 	make_rw((unsigned long)systable[i]);
-	((void**)systable[i])[__NR_getpid] = real_getpid;
+	((void**)systable[i])[__NR_getpid] = real_getpid[i];
 	make_ro((unsigned long)systable[i]);
 	}	
 	sys_call_tab_chged = 0;
+	for(i = 0; i < 2; i++){
 	printk(KERN_INFO"restor getpid now:%p\n",
-		   	systable[__NR_getpid]);
+		   	((void**)systable[i])[__NR_getpid]);
+	}
 	return 0;
 }
 
@@ -224,7 +230,7 @@ static long device_ioctl(/*struct inode* inode,*/ struct file* file, unsigned in
 			break;
 		case IOCTL_START_RECORD:
 			printk(KERN_INFO"ioctl start\n");
-		//	ret = change_sys_call_table();
+			ret = change_sys_call_table();
 			if(ret != 0){
 				printk(KERN_INFO"error change sys call table\n");
 				return -1;
@@ -236,7 +242,7 @@ static long device_ioctl(/*struct inode* inode,*/ struct file* file, unsigned in
 			break;
 		case IOCTL_RESET:
 			printk(KERN_INFO"R&R reset\n");
-		//	restore_sys_call_table();
+			restore_sys_call_table();
 			to_record = 0;
 			to_replay = 0;
 			record_pid = 0;
@@ -250,7 +256,7 @@ static long device_ioctl(/*struct inode* inode,*/ struct file* file, unsigned in
 			break;
 		case IOCTL_START_REPLAY:
 			printk(KERN_INFO"START REPLAY\n");
-		//	change_sys_call_table();
+			change_sys_call_table();
 			break;
 		case IOCTL_STOP_REPLAY:
 			break;
