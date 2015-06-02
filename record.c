@@ -20,10 +20,13 @@
 //#define IOCTL_STOP		0x4
 //#define SYS_CALL_TABLE	0xffffffff8161d3c0
 
-
 #define SYS_TAB_ONE	0xffffffff8020d4f0
+//#define SYS_TAB_ONE	0xffffffff8020dcb8
+//0xffffffff8020d4f0 grep from sysmap
 // t sys_call_table
 #define SYS_TAB_TWO	0xffffffff80215360
+//#define SYS_TAB_TWO	0xffffffff802162d8
+//0xffffffff80215360 grep from sysmap
 //t sys_call_table
 MODULE_LICENSE("GPL");
 char* program = "getpid";
@@ -175,6 +178,12 @@ static  int change_sys_call_table(void)
 		printk(KERN_INFO"getpid changed before, won't subst\n");
 		return -1;
 	}
+
+	for(i = 0; i < 2; i++){
+		printk(KERN_INFO"ori content: %p\n", *((void**)systable[i] + __NR_getpid));
+	}
+
+
 	for(i = 0; i < 2; i++){
 	make_rw((unsigned long)systable[i]);
     //systable = (void**)SYS_CALL_TABLE;
@@ -184,7 +193,7 @@ static  int change_sys_call_table(void)
 	}	
 	sys_call_tab_chged = 1;
 	for(i = 0; i < 2; i++){
-		printk(KERN_INFO"ori: %p now: %p\n", real_getpid[i], rr_getpid);
+		printk(KERN_INFO"stored ori: %p rr_getpid: %p\n", real_getpid[i], rr_getpid);
 	}
 	return 0;
 }
@@ -196,6 +205,11 @@ static int restore_sys_call_table(void)
 	if(sys_call_tab_chged != 1){
 		printk(KERN_INFO"getpid not chged");
 		return -1;
+	}
+
+	for(i = 0; i < 2; i++){
+        printk(KERN_INFO"content before restor getpid:%p\n",
+        	   	((void**)systable[i])[__NR_getpid]);
 	}
 	for(i = 0; i < 2; i++){
 	make_rw((unsigned long)systable[i]);
