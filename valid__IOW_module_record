@@ -1,0 +1,72 @@
+magic: 9 nr: 43 Succ!
+for magic : 9 usageble nr cnt: 1
+magic: 66 nr: 200 Succ!
+magic: 66 nr: 201 Succ!
+for magic : 66 usageble nr cnt: 2
+magic: 67 nr: 200 Succ!
+magic: 67 nr: 201 Succ!
+for magic : 67 usageble nr cnt: 2
+magic: 72 nr: 15 Succ!
+magic: 72 nr: 200 Succ!
+magic: 72 nr: 201 Succ!
+magic: 72 nr: 202 Succ!
+magic: 72 nr: 203 Succ!
+magic: 72 nr: 204 Succ!
+magic: 72 nr: 220 Succ!
+magic: 72 nr: 221 Succ!
+magic: 72 nr: 222 Succ!
+magic: 72 nr: 223 Succ!
+magic: 72 nr: 224 Succ!
+magic: 72 nr: 225 Succ!
+magic: 72 nr: 226 Succ!
+magic: 72 nr: 227 Succ!
+magic: 72 nr: 228 Succ!
+magic: 72 nr: 230 Succ!
+magic: 72 nr: 231 Succ!
+for magic : 72 usageble nr cnt: 17
+magic: 80 nr: 16 Succ!
+magic: 80 nr: 23 Succ!
+for magic : 80 usageble nr cnt: 2
+magic: 81 nr: 6 Succ!
+magic: 81 nr: 8 Succ!
+magic: 81 nr: 9 Succ!
+magic: 81 nr: 13 Succ!
+magic: 81 nr: 15 Succ!
+for magic : 81 usageble nr cnt: 5
+magic: 82 nr: 1 Succ!
+magic: 82 nr: 200 Succ!
+magic: 82 nr: 201 Succ!
+magic: 82 nr: 220 Succ!
+for magic : 82 usageble nr cnt: 4
+magic: 84 nr: 7 Succ!
+magic: 84 nr: 8 Succ!
+magic: 84 nr: 49 Succ!
+magic: 84 nr: 54 Succ!
+for magic : 84 usageble nr cnt: 4
+magic: 85 nr: 200 Succ!
+for magic : 85 usageble nr cnt: 1
+magic: 111 nr: 49 Succ!
+for magic : 111 usageble nr cnt: 1
+magic: 112 nr: 12 Succ!
+magic: 112 nr: 14 Succ!
+magic: 112 nr: 128 Succ!
+magic: 112 nr: 144 Succ!
+magic: 112 nr: 145 Succ!
+magic: 112 nr: 148 Succ!
+magic: 112 nr: 155 Succ!
+for magic : 112 usageble nr cnt: 7
+magic: 116 nr: 56 Succ!
+magic: 116 nr: 58 Succ!
+magic: 116 nr: 59 Succ!
+magic: 116 nr: 60 Succ!
+magic: 116 nr: 61 Succ!
+magic: 116 nr: 64 Succ!
+magic: 116 nr: 81 Succ!
+magic: 116 nr: 82 Succ!
+magic: 116 nr: 84 Succ!
+magic: 116 nr: 87 Succ!
+magic: 116 nr: 89 Succ!
+magic: 116 nr: 118 Succ!
+magic: 116 nr: 120 Succ!
+for magic : 116 usageble nr cnt: 13
+prog ends here, usable command count : 59

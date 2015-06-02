@@ -40,7 +40,7 @@ int main()
 	if(child_pid == 0){
 		ret = ioctl(fd, IOCTL_SET_PID_RECORD, getpid());
 		if(ret < 0){
-			printf("ioctl erro \n");
+			printf("ioctl error setp pid record \n");
 			return -1;
 		}
 		printf("##in setup proc pid: %d\n", getpid());
@@ -69,7 +69,7 @@ int main()
 		}
 		ret = ioctl(fd, IOCTL_RESET, 0);// getpid());
 		if(ret < 0){
-			printf("error send stop signal");
+			printf("error send stop signal IOCTL_RESET");
 			exit(1);                      	
 		}
 	}

@@ -208,8 +208,8 @@ static long device_ioctl(/*struct inode* inode,*/ struct file* file, unsigned in
 {
 	int input;
 	int ret;
-	printk(KERN_INFO"lalal in ioctl num: %u parm: %ld\n", ioctl_num, ioctl_param);
-	return 0;
+	printk(KERN_INFO"lalal in ioctl num: %u parm: %ld\n", _IOC_NR(ioctl_num), ioctl_param);
+//	return 0;
 	switch(ioctl_num)
 	{
 		case IOCTL_SET_PID_RECORD:
