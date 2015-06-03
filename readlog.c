@@ -32,8 +32,10 @@ static int __init init(void)
 	printk(KERN_INFO"read out: %s\n", buf);
 
 	ptr = buf + ret;
-	if(saved_pid = simple_strtol(buf, &ptr, 10)){
-		printk(KERN_INFO"error kstrtol\n");
+	//if((saved_pid = simple_strtol(buf, &ptr, 10))){
+	ret = kstrtol(buf, 10, &saved_pid);
+	if(ret != 0){
+		printk(KERN_INFO"kstrtol error : %d \n", ret);
 	}
 	printk(KERN_INFO"the pid in long int : %ld\n", saved_pid);
 	return 0;

@@ -36,13 +36,13 @@ int main()
 	fd = ret;
 	child_pid = fork();
 	if(child_pid == 0){
-		ret = ioctl(fd, IOCTL_SET_PID_REPLAY, getpid());
+		ret = ioctl(fd, IOCTL_SET_PID_REPLAY);
 		if(ret < 0){
 			printf("error set pid in ioctl\n");
 			exit(1);
 		}
 
-		ret = ioctl(fd, IOCTL_START_REPLAY, 0);
+		ret = ioctl(fd, IOCTL_START_REPLAY);
 		if(ret < 0){
 			printf("Error start repaly\n");
 			exit(1);
@@ -59,7 +59,7 @@ int main()
 			perror("sleep return \n");
 			printf("child exist\n");
 		}
-		ret = ioctl(fd, IOCTL_RESET, 0);
+		ret = ioctl(fd, IOCTL_RESET);
 		if(ret < 0){
 			printf("Error reset from replaying\n");
 			exit(1);

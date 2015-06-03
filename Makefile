@@ -3,6 +3,8 @@ obj-m += record.o
 obj-m += writelog.o
 obj-m += readlog.o
 obj-m += ioctl.o
+obj-m += print_add.o
+obj-m += modisys.o
 else
 all:default stub
 

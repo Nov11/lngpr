@@ -31,8 +31,8 @@ int main(int argc, char* argv[])
 	for(j = 0x0; j <= 0xff; j++){
 		cnt = 0;
 		for(i = 0; i <=  0xff; i++){
-			
-			ret = ioctl(fd, _IOW(j, i, int));
+			ret = ioctl(fd, _IO(j, i));
+			//ret = ioctl(fd, _IOW(j, i, int));
 			//if(ret != 0){
 			//	perror("ioctl");
 			//	printf("ioctl ret != 0\n");

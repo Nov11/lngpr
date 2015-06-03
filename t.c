@@ -13,7 +13,7 @@ int main()
 	int ret;
 	int fd;
 	int cnt = 0;
-	ret = open("record",O_RDWR);
+	ret = open("test",O_RDWR);
 	if(ret < 0){
 		perror("open file test");
 		exit(1);
@@ -27,5 +27,6 @@ int main()
 		}
 	}
 	printf("usageble _IO(magic, )  nr count: %d\n", cnt);
+	printf("pid: %d\n", getpid());
 	return 0;
 }

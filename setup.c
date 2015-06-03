@@ -21,6 +21,7 @@ void sigch(int sig)
 int main()
 {
 	int ret;
+	long record_pid = 0;
 	//struct sigaction sa;
 	//sa.sa_sigaction = sigch;
 	//sa.sa_flags = 
@@ -38,13 +39,19 @@ int main()
 	fd = ret;
 	child_pid = fork();	
 	if(child_pid == 0){
-		ret = ioctl(fd, IOCTL_SET_PID_RECORD, getpid());
+		printf("to do comfermation, pid: %d\n", getpid());
+		ret = ioctl(fd, IOCTL_SET_PID_RECORD);
 		if(ret < 0){
 			printf("ioctl error setp pid record \n");
 			return -1;
 		}
-		printf("##in setup proc pid: %d\n", getpid());
-		ret = ioctl(fd, IOCTL_START_RECORD, 0);
+		ret = ioctl(fd, IOCTL_GET_PID_RECORD, &record_pid);
+		if(ret < 0){
+			printf("error get record pid\n");
+			exit(1);
+		}
+		printf("##in setup proc pid: %d\n", record_pid);
+		ret = ioctl(fd, IOCTL_START_RECORD);
 		if(ret < 0){
 			printf("ioctl failed start recording\n");
 			return -1;
@@ -67,11 +74,12 @@ int main()
 			perror("sleep return\n");
 			printf("child exits\n");
 		}
-		ret = ioctl(fd, IOCTL_RESET, 0);// getpid());
+		ret = ioctl(fd, IOCTL_RESET);// getpid());
 		if(ret < 0){
 			printf("error send stop signal IOCTL_RESET");
 			exit(1);                      	
 		}
+		printf("##setup finished\n");
 	}
 	return 0;
 }	

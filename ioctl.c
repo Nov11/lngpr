@@ -33,8 +33,12 @@ static ssize_t d_write(struct file* filp, const char __user* buffer, size_t leng
 	return 0;
 }
 
+	asmlinkage long (*ptr_getpid)(void);
 static long d_ioctl(struct file* filp, unsigned int ioctl_num, unsigned long ioctl_param){
 	printk(KERN_INFO"## in d_ioctl command : %u param: %lu\n", ioctl_num, ioctl_param);
+	ptr_getpid = (void*)0xffffffff8023ec6c;
+	
+	printk("from module, pid: %ld\n", ptr_getpid());
 	return 0;
 }
 
