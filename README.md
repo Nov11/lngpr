@@ -55,15 +55,15 @@ It seems that port ugly implementation of online record & replay syscall that on
 
 The questions are still there, how to record and replay:
 
-syscalls change the outside environment
+- syscalls change the outside environment
 
-time stamp instructions
+- time stamp instructions
 
-asynchronized signals
+- asynchronized signals
 
-variable access sequence threads preform 
+- variable access sequence threads preform 
 
-and also inter process communication, semaphore, message queue, shared memory
+- and also inter process communication, semaphore, message queue, shared memory
 
-make the replay online(a little lagged behind the recorded one)
+- make the replay online(a little lagged behind the recorded one)
 
