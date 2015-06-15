@@ -15,7 +15,7 @@ void sigch(int sig)
 {
 	int ret;
 	wait(child_pid);
-	printf("wait child done\n");
+	//printf("wait child done\n");
 }
 
 int main(int argc, char* argv[])
@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 	fd = ret;
 	child_pid = fork();	
 	if(child_pid == 0){
-		printf("to do comfermation, pid: %d\n", getpid());
+		//printf("to do comfermation, pid: %d\n", getpid());
 		ret = ioctl(fd, IOCTL_SET_PID_RECORD);
 		if(ret < 0){
 			printf("ioctl error setp pid record \n");
@@ -50,14 +50,15 @@ int main(int argc, char* argv[])
 			printf("error get record pid\n");
 			exit(1);
 		}
-		printf("##in setup proc pid: %d\n", record_pid);
+		//printf("##in setup proc pid: %d\n", record_pid);
 		ret = ioctl(fd, IOCTL_START_RECORD);
 		if(ret < 0){
 			printf("ioctl failed start recording\n");
 			return -1;
 		}
-		printf("start recording\n");
+		//printf("start recording\n");
 		if(argc == 2){
+			//printf("!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 			ret = execl("getpidn", "getpidn", argv[1], NULL);
 		}else{
 			ret = execl("getpid", "getpid", NULL);
@@ -75,15 +76,15 @@ int main(int argc, char* argv[])
 //		}
 		ret = sleep(100);
 		if(ret != 0){
-			perror("sleep return\n");
-			printf("child exits\n");
+			//perror("sleep return\n");
+			//printf("child exits\n");
 		}
 		ret = ioctl(fd, IOCTL_RESET);// getpid());
 		if(ret < 0){
 			printf("error send stop signal IOCTL_RESET");
 			exit(1);                      	
 		}
-		printf("##setup finished\n");
+		//printf("##setup finished\n");
 	}
 	return 0;
 }	

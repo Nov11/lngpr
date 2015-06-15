@@ -16,9 +16,13 @@ default:
 clean:
 	make -C /lib/modules/3.10.0-2015.03.17.fc19.mipsel/build/ M=`pwd` clean
 	#make -C ../linuxsrc M=`pwd` clean
-	rm setup replay getpid
-stub: setup getpid replay
+	rm setup replay getpid getpidn setupn replayn
+stub: setup getpid replay getpidn
 setup replay: command.h
-getpid:
+getpid:gp.c
 	gcc -o getpid gp.c
+getpidn:gpn.c setupn.c replayn.c
+	gcc -o getpidn gpn.c
+	gcc -o setupn setupn.c
+	gcc -o replayn replayn.c
 endif

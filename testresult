@@ -1,0 +1,33 @@
+base case run getpidn
+pid: 5101 repeat 100000 times, it takes: 0.035203 s
+pid: 5102 repeat 200000 times, it takes: 0.070579 s
+pid: 5103 repeat 300000 times, it takes: 0.107518 s
+pid: 5104 repeat 400000 times, it takes: 0.140988 s
+pid: 5105 repeat 500000 times, it takes: 0.176111 s
+pid: 5106 repeat 600000 times, it takes: 0.211072 s
+pid: 5107 repeat 700000 times, it takes: 0.245905 s
+pid: 5108 repeat 800000 times, it takes: 0.280555 s
+pid: 5109 repeat 900000 times, it takes: 0.316242 s
+pid: 5110 repeat 1000000 times, it takes: 0.351199 s
+enable recording
+pid: 5112 repeat 100000 times, it takes: 0.035398 s
+pid: 5114 repeat 200000 times, it takes: 0.070713 s
+pid: 5116 repeat 300000 times, it takes: 0.105810 s
+pid: 5118 repeat 400000 times, it takes: 0.140520 s
+pid: 5120 repeat 500000 times, it takes: 0.176408 s
+pid: 5122 repeat 600000 times, it takes: 0.210648 s
+pid: 5124 repeat 700000 times, it takes: 0.249088 s
+pid: 5126 repeat 800000 times, it takes: 0.281141 s
+pid: 5128 repeat 900000 times, it takes: 0.316879 s
+pid: 5130 repeat 1000000 times, it takes: 0.351805 s
+enable replaying
+pid: 5130 repeat 100000 times, it takes: 0.035216 s
+pid: 5130 repeat 200000 times, it takes: 0.070787 s
+pid: 5130 repeat 300000 times, it takes: 0.105658 s
+pid: 5130 repeat 400000 times, it takes: 0.140769 s
+pid: 5130 repeat 500000 times, it takes: 0.175965 s
+pid: 5130 repeat 600000 times, it takes: 0.210693 s
+pid: 5130 repeat 700000 times, it takes: 0.245811 s
+pid: 5130 repeat 800000 times, it takes: 0.281733 s
+pid: 5130 repeat 900000 times, it takes: 0.316916 s
+pid: 5130 repeat 1000000 times, it takes: 0.352245 s

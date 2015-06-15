@@ -13,7 +13,7 @@ int main()
 	int ret;
 	int fd;
 	int cnt = 0;
-	ret = open("test",O_RDWR);
+	ret = open("test",O_RDONLY);
 	if(ret < 0){
 		perror("open file test");
 		exit(1);

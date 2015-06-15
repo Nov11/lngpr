@@ -53,7 +53,7 @@ static struct file_operations fops = {
 int init_module(void)
 {
 	int ret = 0;
-	printk(KERN_INFO"=========Record & Replay=========\n");
+	printk(KERN_INFO"=========in file ioctl Record & Replay=========\n");
 	ret = register_chrdev(0, "r&r", &fops);
 	if(ret < 0){
 		printk(KERN_INFO "Error regs dev\n");

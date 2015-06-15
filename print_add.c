@@ -2,8 +2,9 @@
 #include <linux/kernel.h>
 #include <linux/syscalls.h>
 
-#define SYS_CALL_TAB	0xffffffff80215360
-//0xffffffff8020d4f0
+#define SYS_CALL_TAB	0xffffffff8020d4f0 
+//0xffffffff80215360
+
 
 int init_module(void)
 {
